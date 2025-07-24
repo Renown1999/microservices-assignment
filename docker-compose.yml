@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+
+  user-service:
+    build:
+      context: ./user-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+
+  order-service:
+    build:
+      context: ./order-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - user-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+
+  product-service:
+    build:
+      context: ./product-service
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+
